@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './ContactList.module.css';
 import { fetchContacts, deletedContact } from '../../redux/actions/phonebook-operations';
 import { Component } from 'react';
+import{ getFilteredContacts } from '../../redux/actions/phonebook-selectors';
 
 class ContactList extends Component {
   
@@ -39,23 +40,9 @@ ContactList.propTypes = {
     renderedContacts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => {
-  const { contacts } = state;
-  
-  if(contacts.filter) {
-    const normalizedFilter = contacts.filter.toLowerCase(); 
-    const filtredContacts = contacts.items.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
-
-    return {
-      renderedContacts: filtredContacts,
-    }
-  }  
-
-  return {
-    renderedContacts: contacts.items,
-  }
- 
-}
+const mapStateToProps = state => ({
+  renderedContacts: getFilteredContacts(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   deletedContactbyId: event => {dispatch(deletedContact(event.currentTarget.id))},
@@ -63,3 +50,20 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+
+// const mapStateToProps = state => {
+//   const { contacts } = state;
+  
+//   if(contacts.filter) {
+//     const normalizedFilter = contacts.filter.toLowerCase(); 
+//     const filtredContacts = contacts.items.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+
+//     return {
+//       renderedContacts: filtredContacts,
+//     }
+//   }  
+
+//   return {
+//     renderedContacts: contacts.items,
+//   }
+// }
