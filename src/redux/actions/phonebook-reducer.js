@@ -2,6 +2,9 @@ import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 // import types from './phonebook-types';
 import {
+    fetchContactRequest,
+    fetchContactSuccess,
+    fetchContactError,
     addContactRequest,
     addContactSuccess,
     addContactError,
@@ -19,6 +22,7 @@ const initialState = [
 ];
 
 const contactReducer = createReducer(initialState, {
+    [fetchContactSuccess]: (state, { payload }) => payload,
     [addContactSuccess]: (state, { payload }) => [...state, payload],
     [deletedContactSuccess]: (state, { payload }) => state.filter(contact => contact.id !== payload),
 })
@@ -28,6 +32,9 @@ const filterReducer = createReducer('', {
 })
 
 const loadingReducer = createReducer(false, {
+    [fetchContactRequest]: () => true,
+    [fetchContactSuccess]: () => false,
+    [fetchContactError]: () => false,
     [addContactRequest]: () => true,
     [addContactSuccess]: () => false,
     [addContactError]: () => false,

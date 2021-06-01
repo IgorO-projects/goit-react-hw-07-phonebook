@@ -1,30 +1,38 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './ContactList.module.css';
-import { deletedContact } from '../../redux/actions/phonebook-operations';
+import { fetchContacts, deletedContact } from '../../redux/actions/phonebook-operations';
+import { Component } from 'react';
 
-const ContactList = ({ renderedContacts, deletedContactbyId }) => {
+class ContactList extends Component {
+  
+  componentDidMount() {
+    this.props.fetchedContacts()
+  }
+
+  render () {
     return (
-        <ul className={styles.list}>
-          {renderedContacts.map(contact => {
-            return (
-              <li 
-              className={styles.list__item}
-              key={contact.id}>
-                <span
-                className={styles.list__text}
-                >{contact.name}: {contact.number}</span>
-                <button
-                id={contact.id}
-                className={styles.list__button}
-                type="button"
-                onClick={deletedContactbyId}
-                >delete</button>
-              </li>
-            )
-          })}
-        </ul>
+      <ul className={styles.list}>
+        {this.props.renderedContacts.map(contact => {
+          return (
+            <li 
+            className={styles.list__item}
+            key={contact.id}>
+              <span
+              className={styles.list__text}
+              >{contact.name}: {contact.number}</span>
+              <button
+              id={contact.id}
+              className={styles.list__button}
+              type="button"
+              onClick={this.props.deletedContactbyId}
+              >delete</button>
+            </li>
+          )
+        })}
+      </ul>
     )
+  }
 }
 
 ContactList.propTypes = {
@@ -50,7 +58,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  deletedContactbyId: event => {dispatch(deletedContact(event.currentTarget.id))}
+  deletedContactbyId: event => {dispatch(deletedContact(event.currentTarget.id))},
+  fetchedContacts: () => {dispatch(fetchContacts())},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
