@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './ContactForm.module.css';
-import { handleContactAdd } from '../../redux/actions/phonebook-actions';
+import { handleContactAdd, } from '../../redux/actions/phonebook-operations';
 
 class ContactForm extends Component {
   state = {

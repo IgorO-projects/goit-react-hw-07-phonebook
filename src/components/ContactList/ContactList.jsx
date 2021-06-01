@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './ContactList.module.css';
-import { deletedContact } from '../../redux/actions/phonebook-actions';
+import { deletedContact } from '../../redux/actions/phonebook-operations';
 
 const ContactList = ({ renderedContacts, deletedContactbyId }) => {
     return (
