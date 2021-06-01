@@ -1,0 +1,29 @@
+.list {
+   list-style: none; 
+   padding-left: 0;
+}
+.list__item {
+    width: 320px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 1px rgb(0 0 0 / 14%), 0 2px 1px rgb(0 0 0 / 20%);
+}
+.list__item:nth-child(2n) {
+    background-color: #f5f4fa;;
+}
+.list__item:not(:last-child) {
+    margin-bottom: 10px;
+}
+.list__text {
+    margin-right: auto;
+}
+.list__button {
+    padding: 3px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.list__button:hover,
+.list__button:focus {
+    background-color:  orchid;
+}

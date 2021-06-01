@@ -1,0 +1,21 @@
+.input {
+    width: 312px;
+    outline: none;
+}
+.input:hover,
+.input:focus {
+    border-color: orchid;
+    border-radius: 2px;
+}
+.button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover,
+.button:focus {
+    background-color:  orchid;
+}
